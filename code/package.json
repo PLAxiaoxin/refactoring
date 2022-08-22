@@ -1,0 +1,17 @@
+{
+  "name": "refactoring",
+  "version": "1.0.0",
+  "main": "main.js",
+  "repository": "https://github.com/PLAxiaoxin/refactoring.git",
+  "author": "PLAxiaoxin <15820485835@163.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@vitest/coverage-c8": "^0.22.1",
+    "vitest": "^0.22.1"
+  }
+}
