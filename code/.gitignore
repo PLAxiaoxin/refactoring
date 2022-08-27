@@ -8,3 +8,7 @@
 *.njsproj
 *.sln
 *.sw?
+
+node_modules
+yarn.lock
+coverage
