@@ -148,5 +148,5 @@
     - 用新函数替换源码中的位置
     - 测试
     - 查看其他代码中是否有相同和相似的代码，有的话进行替换。
-  - [范例](./src/demo/extractFunction.js)
+  - [范例](https://github.com/PLAxiaoxin/refactoring/tree/main/code/src/demo/extractFunction.js)
 2. 内联函数
