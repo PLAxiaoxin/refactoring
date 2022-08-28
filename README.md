@@ -116,6 +116,7 @@
 
 ## 第六章 第一组重构
 1. 提炼函数
+   反向重构： 内联函数
     ```
     function printOwing(invoice){
         printBanner();
@@ -138,7 +139,7 @@
         }
     }
     ```
-  - 动机：重构的动机
+  - 动机：
     - 一段代码需要花时间去理解。
     - 一个函数一旦超过6行。
   - 做法
@@ -149,4 +150,29 @@
     - 测试
     - 查看其他代码中是否有相同和相似的代码，有的话进行替换。
   - [范例](https://github.com/PLAxiaoxin/refactoring/tree/main/code/src/demo/extractFunction.js)
+  - ⚠️注意：尽量避免直接调用 Date.now() 这样的函数。因为会导致测试行为不可预测。
 2. 内联函数
+   反向重构： 提炼函数
+   ```
+    function getRating(driver) {
+        return moreThanFiveLateDeliveries(driver) ? 2 : 1;
+    }
+
+    function moreThanFiveLateDeliveries(driver) {
+        return driver.numberOfLateDeliveries > 5;
+    }
+
+
+    function getRating(driver) {
+        return driver.numberOfLateDeliveries > 5 ? 2 : 1;
+    }
+   ```
+  - 动机：
+    - 内容和名称都很清晰时。
+  - 做法
+    - 检查函数，确定不具有多态性。
+    - 找出这个函数所有调用点
+    - 将这个函数所有调用点替换成函数本体
+    - 每次替换之后，执行测试
+    - 删除该函数的定义
+  - [范例](https://github.com/PLAxiaoxin/refactoring/tree/main/code/src/demo/inlineFunction.js)  
