@@ -167,12 +167,46 @@
         return driver.numberOfLateDeliveries > 5 ? 2 : 1;
     }
    ```
-  - 动机：
-    - 内容和名称都很清晰时。
+  - 动机：内容和名称都很清晰时。
   - 做法
     - 检查函数，确定不具有多态性。
     - 找出这个函数所有调用点
     - 将这个函数所有调用点替换成函数本体
     - 每次替换之后，执行测试
     - 删除该函数的定义
-  - [范例](https://github.com/PLAxiaoxin/refactoring/tree/main/code/src/demo/inlineFunction.js)  
+  - [范例](https://github.com/PLAxiaoxin/refactoring/tree/main/code/src/demo/inlineFunction.js) 
+3. 提炼变量
+   反向重构：内联变量
+  - 动机
+    - 表达式复杂且难以阅读
+  - 做法：
+    - 确认提炼的表达式没有副作用
+    - 声明不可改变的变量，把想提炼的变量的表达式复制一份，以表达式的结果，赋值给变量
+    - 用新变量取代原来的表达式
+  - [范例](https://github.com/PLAxiaoxin/refactoring/tree/main/code/src/demo/extractVariable.js)
+4. 内联变量
+   反向重构：提炼变量
+ - 动机：表达式本身已经能清楚表达信息时
+ - 做法：
+  - 检查确认变量赋值语句的右边表达式没有副作用。
+  - 变量为可修改时，先将其改为不可修改。执行测试，确保该变量只被赋值一次。
+  - 找到该变量使用的地方，将其替换为表达式，测试
+  - 重复前面两步，逐一替换。
+  - 删除该变量的声明和赋值语句， 测试。
+5. 改变函数声明
+ - 动机：发现一些无法准确表达的函数名。
+ - 做法：
+  - 简单做法
+   - 移除参数，确认函数体没有引用该参数
+   - 修改函数声明，改成你期望的状态
+   - 找到使用旧函数声明的地方，替换为新函数声明，测试
+  - 迁移式做法
+   - 如果有必要的话，先对函数体进行重构，方便后面的提炼步骤。
+   - 使用提炼函数将函数体提炼成一个新函数。
+   - 如果函数需要添加参数，使用前面的简单做法即可
+   - 测试
+   - 对新函数使用内联函数
+   - 如果新函数使用了临时名字，再次使用改变函数声明，将其改回原来的名字。
+   - 测试
+ - [范例](https://github.com/PLAxiaoxin/refactoring/tree/main/code/src/demo/changeFunctionDeclaration.js)
+   
